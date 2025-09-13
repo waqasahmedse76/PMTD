@@ -35,6 +35,7 @@ class MLApp:
         # Models/params registry (kept in sync with functions.py)
         # Tuple format: (type, required)
         self.models = {
+            # ---------- Regressors ----------
             "XGBoost": {
                 "learning_rate": (float, True),
                 "epochs": (int, True),        # used as fallback for n_estimators
@@ -78,6 +79,44 @@ class MLApp:
                 "selection": (str, False),
                 "positive": (bool, False),
                 "random_state": (int, False),
+            },
+
+            # ---------- Classifiers (new) ----------
+            "XGBClassifier": {
+                "learning_rate": (float, False),
+                "n_estimators": (int, False),
+                "max_depth": (int, False),
+                "min_child_weight": (float, False),
+                "subsample": (float, False),
+                "colsample_bytree": (float, False),
+                "gamma": (float, False),
+                "reg_alpha": (float, False),
+                "reg_lambda": (float, False),
+            },
+            "RandomForestClassifier": {
+                "n_estimators": (int, False),
+                "max_depth": (int, False),
+                "min_samples_split": (int, False),
+                "min_samples_leaf": (int, False),
+                "max_features": (str, False),     # 'auto', 'sqrt', 'log2' (enter as string)
+                "bootstrap": (bool, False),
+                "random_state": (int, False),
+            },
+            "LogisticRegression": {              # classifier variant
+                "penalty": (str, False),        # 'l2','l1','elasticnet','none'
+                "C": (float, False),
+                "solver": (str, False),         # 'lbfgs','liblinear','saga','newton-cg','sag'
+                "max_iter": (int, False),
+                "fit_intercept": (bool, False),
+                "n_jobs": (int, False),
+                "l1_ratio": (float, False),     # only if penalty='elasticnet'
+            },
+            "SVC": {
+                "C": (float, False),
+                "kernel": (str, False),         # 'rbf','linear','poly','sigmoid'
+                "gamma": (str, False),          # 'scale','auto' (or float but enter as string here)
+                "degree": (int, False),
+                "probability": (bool, False),
             },
         }
 
